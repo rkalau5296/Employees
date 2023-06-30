@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:Employees"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        Name="EditEmployeeWindow"
         Title="Dane pracownika" Height="520" Width="400">
     <Grid>
         <Grid.RowDefinitions>
@@ -15,31 +16,35 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Id" Margin="5"/>
-        <TextBox Grid.Column="1" Margin="5"/>
+        <Label Visibility="{Binding IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Id" Margin="5"/>
+        <TextBox Text="{Binding Employee.Id}" IsReadOnly="True" Grid.Column="1" Margin="5"/>
+        
+        <Label Grid.Row="1" Content="Id" Margin="5"/>
+        <TextBox Text="{Binding Employee.id}" Grid.Row="1" Grid.Column="1" Margin="5"/>
+        
+        <Label Grid.Row="2" Content="Name" Margin="5"/>
+        <TextBox Text="{Binding Employee.Name}" Grid.Row="2" Grid.Column="1" Margin="5"/>
 
-        <Label Grid.Row="1" Content="Name" Margin="5"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="5"/>
+        <Label Grid.Row="3" Content="Surename" Margin="5"/>
+        <TextBox Text="{Binding Employee.Surename}" Grid.Row="3" Grid.Column="1" Margin="5"/>
 
-        <Label Grid.Row="2" Content="Surename" Margin="5"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
+        <Label Grid.Row="4" Content="Email" Margin="5"/>
+        <TextBox Text="{Binding Employee.Email}" Grid.Row="4" Grid.Column="1" Margin="5"/>
 
-        <Label Grid.Row="3" Content="Email" Margin="5"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <Label Grid.Row="5" Content="Phone" Margin="5"/>
+        <TextBox Text="{Binding Employee.Phone}" Grid.Row="5" Grid.Column="1" Margin="5"/>
 
-        <Label Grid.Row="4" Content="Phone" Margin="5"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Margin="5"/>
-
-        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right"   >
-            <Button Content="Anuluj" Height="25" Width="100" Margin="5"/>
-            <Button Content="Zatwierdź" Height="25" Width="100" Margin="5"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center"   >
+            <Button Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=EditEmployeeWindow}" Content="Anuluj" Height="25" Width="100" Margin="5"/>
+            <Button Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=EditEmployeeWindow}" Content="Zatwierdź" Height="25" Width="100" Margin="5"/>
         </StackPanel>
 
     </Grid>

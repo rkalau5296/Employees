@@ -14,9 +14,28 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <Button Content="Wczytaj plik" Height="25" Width="100" Margin="5"/>
+            <Button Content="Wczytaj plik" Command="{Binding ReadEmployeesFileCommand}" Height="25" Width="100" Margin="5"/>
+            <Button Content="Edytuj" Command="{Binding EditEmployeeCommand}" CommandParameter="{Binding SelectedEmployee}" Height="25" Width="100" Margin="5"/>
             <Button Command="{Binding RefreshEmployeesCommand}" Content="Odświeź" Height="25" Width="100" Margin="5"/>
         </StackPanel>
-        <DataGrid Grid.Row="1" Margin="5"/>
+        <DataGrid
+            Grid.Row="1" 
+            Margin="5"
+            ItemsSource="{Binding Employees}"
+            SelectedItem="{Binding SelectedEmployee}"
+            CanUserAddRows="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            AutoGenerateColumns="False"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding id}" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Imię"/>
+                <DataGridTextColumn Binding="{Binding Surename}" Header="Nazwisko"/>
+                <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
+                <DataGridTextColumn Binding="{Binding Phone}" Header="Telefon"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </mah:MetroWindow>
