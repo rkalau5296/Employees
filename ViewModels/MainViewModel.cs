@@ -1,10 +1,14 @@
 ﻿using Employees.Commands;
 using Employees.Models;
+using Employees.Models.Domains;
 using Employees.Models.Wrappers;
 using Employees.Views;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,7 +105,9 @@ namespace Employees.ViewModels
 
         private void ReadEmployeesFile(object obj)
         {
-            
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.ShowDialog();
         }
 
         private void EditEmployee(object obj)
