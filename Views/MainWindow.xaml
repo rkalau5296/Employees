@@ -29,8 +29,7 @@
             AutoGenerateColumns="False"
             >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn Binding="{Binding id}" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Imię"/>
                 <DataGridTextColumn Binding="{Binding Surename}" Header="Nazwisko"/>
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>

@@ -1,5 +1,6 @@
 ﻿using Employees.Commands;
 using Employees.Models;
+using Employees.Models.Wrappers;
 using Employees.Views;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,16 @@ namespace Employees.ViewModels
     {
         public MainViewModel()
         {
+            using(var context = new ApplicationDbContext())
+            {
+                var employees = context.Employees.ToList();
+            }
+
             RefreshEmployeesCommand = new RelayCommand(RefreshEmployees);
             ReadEmployeesFileCommand = new RelayCommand(ReadEmployeesFile);
             EditEmployeeCommand = new RelayCommand(EditEmployee, CanEditEmployee);
 
-            RefreshDiary();
+            Refresh();
 
         }
         
@@ -29,8 +35,8 @@ namespace Employees.ViewModels
         public ICommand ReadEmployeesFileCommand { get; set; }
         public ICommand EditEmployeeCommand { get; set; }
 
-        private Employee _selectedEmployee;
-        public Employee SelectedEmployee
+        private EmployeeWrapper _selectedEmployee;
+        public EmployeeWrapper SelectedEmployee
         {
             get 
             {
@@ -43,8 +49,8 @@ namespace Employees.ViewModels
             }
         }
 
-        private ObservableCollection<Employee> _employees;
-        public ObservableCollection<Employee> Employees
+        private ObservableCollection<EmployeeWrapper> _employees;
+        public ObservableCollection<EmployeeWrapper> Employees
         {
             get
             {
@@ -57,40 +63,40 @@ namespace Employees.ViewModels
             }
         }
 
-        private void RefreshDiary()
+        private void Refresh()
         {
-            Employees = new ObservableCollection<Employee>
+            Employees = new ObservableCollection<EmployeeWrapper>
             {
-                new Employee
+                new EmployeeWrapper
                 {
-                    id="1",
+                    Id=1,
                     Name="Rafal",
                     Surename="Kalata",
                     Email="rafal@rafal.pl",
-                    phone="502215223"
+                    Phone="502215223"
                 },
-                new Employee
+                new EmployeeWrapper
                 {
-                    id="2",
+                    Id=1,
                     Name="Piotr",
                     Surename="Kowal",
                     Email="rafal@rafal.pl",
-                    phone="502215223"
+                    Phone="502215223"
                 },
-                new Employee
+                new EmployeeWrapper
                 {
-                    id="3",
+                    Id=3,
                     Name="Pawel",
                     Surename="Mieczkowski",
                     Email="rafal@rafal.pl",
-                    phone="502215223"
+                    Phone="502215223"
                 }
             };
         }
 
         private void RefreshEmployees(object obj)
         {
-            RefreshDiary();
+            Refresh();
         }
 
         private void ReadEmployeesFile(object obj)
@@ -100,14 +106,14 @@ namespace Employees.ViewModels
 
         private void EditEmployee(object obj)
         {
-            var addEditEmployeeWindow = new EditEmployeeView(obj as Employee);
+            var addEditEmployeeWindow = new EditEmployeeView(obj as EmployeeWrapper);
             addEditEmployeeWindow.Closed += EditEmployeeWindow_Closed;
             addEditEmployeeWindow.ShowDialog();
         }
 
         private void EditEmployeeWindow_Closed(object sender, EventArgs e)
         {
-            RefreshDiary(); ;
+            Refresh();
         }
 
         private bool CanEditEmployee(object obj)

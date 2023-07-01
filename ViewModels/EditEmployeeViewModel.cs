@@ -1,5 +1,7 @@
 ﻿using Employees.Commands;
 using Employees.Models;
+using Employees.Models.Repositories;
+using Employees.Models.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,10 +14,12 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace Employees.ViewModels
-{
+{   
+
     public class EditEmployeeViewModel : ViewModelBase
     {
-        public EditEmployeeViewModel(Employee employee = null)
+        private EmployeeRepository _employeeRepository = new EmployeeRepository();
+        public EditEmployeeViewModel(EmployeeWrapper employee = null)
         {
             CloseCommand = new RelayCommand(Close);
             ConfirmCommand = new RelayCommand(Confirm);            
@@ -28,8 +32,8 @@ namespace Employees.ViewModels
         public ICommand CloseCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
 
-        private Employee _employee { get; set; }
-        public Employee Employee
+        private EmployeeWrapper _employee { get; set; }
+        public EmployeeWrapper Employee
         {
             get 
             { 
@@ -56,8 +60,8 @@ namespace Employees.ViewModels
             }
         }
 
-        private ObservableCollection<Employee> _employees;
-        public ObservableCollection<Employee> Employees
+        private ObservableCollection<EmployeeWrapper> _employees;
+        public ObservableCollection<EmployeeWrapper> Employees
         {
             get
             {
@@ -72,13 +76,8 @@ namespace Employees.ViewModels
 
         private void Confirm(object obj)
         {
-            UpdateEmployee();
+            _employeeRepository.Update(Employee);
             CloseWindow(obj as Window);
-        }
-
-        private void UpdateEmployee()
-        {
-            //baza
         }
 
         private void Close(object obj)

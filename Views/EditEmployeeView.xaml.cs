@@ -1,4 +1,5 @@
 ﻿using Employees.Models;
+using Employees.Models.Wrappers;
 using Employees.ViewModels;
 using MahApps.Metro.Controls;
 using System;
@@ -22,10 +23,15 @@ namespace Employees.Views
     /// </summary>
     public partial class EditEmployeeView : MetroWindow
     {
-        public EditEmployeeView(Employee employee = null)
+        public EditEmployeeView(EmployeeWrapper employee = null)
         {
             InitializeComponent();
             DataContext = new EditEmployeeViewModel(employee);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

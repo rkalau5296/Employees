@@ -25,10 +25,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Visibility="{Binding IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Id" Margin="5"/>
-        <TextBox Text="{Binding Employee.Id}" IsReadOnly="True" Grid.Column="1" Margin="5"/>
-        
-        <Label Grid.Row="1" Content="Id" Margin="5"/>
-        <TextBox Text="{Binding Employee.id}" Grid.Row="1" Grid.Column="1" Margin="5"/>
+        <TextBox Text="{Binding Employee.Id}" IsReadOnly="True" Grid.Column="1" Margin="5"/>        
         
         <Label Grid.Row="2" Content="Name" Margin="5"/>
         <TextBox Text="{Binding Employee.Name}" Grid.Row="2" Grid.Column="1" Margin="5"/>
@@ -43,7 +40,7 @@
         <TextBox Text="{Binding Employee.Phone}" Grid.Row="5" Grid.Column="1" Margin="5"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center"   >
-            <Button Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=EditEmployeeWindow}" Content="Anuluj" Height="25" Width="100" Margin="5"/>
+            <Button Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=EditEmployeeWindow}" Content="Anuluj" Height="25" Width="100" Margin="5" Click="Button_Click"/>
             <Button Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=EditEmployeeWindow}" Content="Zatwierdź" Height="25" Width="100" Margin="5"/>
         </StackPanel>
 
