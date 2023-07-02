@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using Employees.Models.Converters;
+using System.Collections.ObjectModel;
 
 namespace Employees.Models.Repositories
 {
@@ -18,7 +19,7 @@ namespace Employees.Models.Repositories
             {
                 var employees = context.Employees.ToList();
 
-                return employees.Select(x => x.ToWrapper()).ToList();    
+                return employees.Select(x => x.ToWrapper()).ToList();
             }
         }
         public EmployeeWrapper GetEmployee(int id)
@@ -28,7 +29,7 @@ namespace Employees.Models.Repositories
                 return context.Employees.Single(x => x.Id == id).ToWrapper();                    
             }
         }
-        public void AddToDb(List<EmployeeWrapper> employees)
+        public void AddToDb(ObservableCollection<EmployeeWrapper> employees)
         {
             var daoEmployees = employees.Select(x => x.ToDao()).ToList();
 
@@ -55,5 +56,6 @@ namespace Employees.Models.Repositories
                 context.SaveChanges();
             }
         }
+        
     }
 }

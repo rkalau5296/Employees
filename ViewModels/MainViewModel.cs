@@ -1,6 +1,7 @@
 ﻿using Employees.Commands;
 using Employees.Models;
 using Employees.Models.Domains;
+using Employees.Models.Repositories;
 using Employees.Models.Wrappers;
 using Employees.Views;
 using Microsoft.Win32;
@@ -19,6 +20,8 @@ namespace Employees.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private EmployeeRepository _employeeRepository = new EmployeeRepository();
+
         public MainViewModel()
         {
             using(var context = new ApplicationDbContext())
@@ -69,33 +72,7 @@ namespace Employees.ViewModels
 
         private void Refresh()
         {
-            Employees = new ObservableCollection<EmployeeWrapper>
-            {
-                new EmployeeWrapper
-                {
-                    Id=1,
-                    Name="Rafal",
-                    Surename="Kalata",
-                    Email="rafal@rafal.pl",
-                    Phone="502215223"
-                },
-                new EmployeeWrapper
-                {
-                    Id=1,
-                    Name="Piotr",
-                    Surename="Kowal",
-                    Email="rafal@rafal.pl",
-                    Phone="502215223"
-                },
-                new EmployeeWrapper
-                {
-                    Id=3,
-                    Name="Pawel",
-                    Surename="Mieczkowski",
-                    Email="rafal@rafal.pl",
-                    Phone="502215223"
-                }
-            };
+            Employees = new ObservableCollection<EmployeeWrapper>(_employeeRepository.GetEmployees());            
         }
 
         private void RefreshEmployees(object obj)
@@ -108,6 +85,12 @@ namespace Employees.ViewModels
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.ShowDialog();
+
+            //
+            // HOW TO DO?
+            //
+
+            _employeeRepository.AddToDb(Employees);
         }
 
         private void EditEmployee(object obj)
