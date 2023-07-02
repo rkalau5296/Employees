@@ -15,8 +15,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Content="Wczytaj plik" Command="{Binding ReadEmployeesFileCommand}" Height="25" Width="100" Margin="5"/>
-            <Button Content="Edytuj" Command="{Binding EditEmployeeCommand}" CommandParameter="{Binding SelectedEmployee}" Height="25" Width="100" Margin="5"/>
-            <Button Command="{Binding RefreshEmployeesCommand}" Content="Odświeź" Height="25" Width="100" Margin="5"/>
+            <Button Content="Edytuj" Command="{Binding EditEmployeeCommand}" CommandParameter="{Binding SelectedEmployee}" Height="25" Width="100" Margin="5"/>            
         </StackPanel>
         <DataGrid
             Grid.Row="1" 

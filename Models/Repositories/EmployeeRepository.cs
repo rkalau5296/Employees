@@ -1,13 +1,8 @@
 ﻿using Employees.Models.Domains;
 using Employees.Models.Wrappers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
 using Employees.Models.Converters;
-using System.Collections.ObjectModel;
 
 namespace Employees.Models.Repositories
 {

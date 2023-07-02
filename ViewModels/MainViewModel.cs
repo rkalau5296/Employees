@@ -1,21 +1,15 @@
 ﻿using CsvHelper;
 using Employees.Commands;
-using Employees.Models;
 using Employees.Models.Domains;
 using Employees.Models.Repositories;
 using Employees.Models.Wrappers;
 using Employees.Views;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Employees.ViewModels
@@ -30,15 +24,12 @@ namespace Employees.ViewModels
             {
                 var employees = context.Employees.ToList();
             }
-
-            RefreshEmployeesCommand = new RelayCommand(RefreshEmployees);
+            
             ReadEmployeesFileCommand = new RelayCommand(ReadEmployeesFile);
             EditEmployeeCommand = new RelayCommand(EditEmployee, CanEditEmployee);
 
             Refresh();
-
-        }
-        
+        }        
 
         public ICommand RefreshEmployeesCommand { get; set; }
         public ICommand ReadEmployeesFileCommand { get; set; }
@@ -75,12 +66,7 @@ namespace Employees.ViewModels
         private void Refresh()
         {
             Employees = new ObservableCollection<EmployeeWrapper>(_employeeRepository.GetEmployees());            
-        }
-
-        private void RefreshEmployees(object obj)
-        {
-            Refresh();
-        }
+        }       
 
         private void ReadEmployeesFile(object obj)
         {

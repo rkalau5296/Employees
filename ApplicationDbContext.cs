@@ -1,8 +1,6 @@
 using Employees.Models.Configuratons;
 using Employees.Models.Domains;
-using System;
 using System.Data.Entity;
-using System.Linq;
 
 namespace Employees
 {

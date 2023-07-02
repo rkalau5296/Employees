@@ -1,10 +1,5 @@
 ﻿using Employees.Models.Domains;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Employees.Models.Configuratons
 {
