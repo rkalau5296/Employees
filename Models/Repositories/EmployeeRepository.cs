@@ -22,22 +22,18 @@ namespace Employees.Models.Repositories
                 return employees.Select(x => x.ToWrapper()).ToList();
             }
         }
-        public EmployeeWrapper GetEmployee(int id)
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                return context.Employees.Single(x => x.Id == id).ToWrapper();                    
-            }
-        }
+        
         public void AddToDb(List<Employee> employees)
         {
             using (var context = new ApplicationDbContext())
-            {
-                
+            {                
                 employees.ForEach(e =>
-                {
-                    context.Employees.Add(e);
-                    context.SaveChanges();
+                {                    
+                    if (!context.Employees.Any(x => x.Id == e.Id))
+                    {
+                        context.Employees.Add(e);
+                        context.SaveChanges();
+                    }                    
                 });                
             }
         }
