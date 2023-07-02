@@ -84,21 +84,25 @@ namespace Employees.ViewModels
 
         private void ReadEmployeesFile(object obj)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.ShowDialog();
-
-            using (var reader = new StreamReader(openFileDialog.FileName))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            try
             {
-                csv.Context.RegisterClassMap<EmployeeMap>();
-                var records = csv.GetRecords<Employee>();
-                var employees = records.ToList();
+                OpenFileDialog openFileDialog = new OpenFileDialog();
 
-                _employeeRepository.AddToDb(employees);
+                openFileDialog.ShowDialog();                
+                    using (var reader = new StreamReader(openFileDialog.FileName))
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        csv.Context.RegisterClassMap<EmployeeMap>();
+                        var records = csv.GetRecords<Employee>();
+                        var employees = records.ToList();
+
+                        _employeeRepository.AddToDb(employees);
+                    }                
+                Refresh();
+            }catch(Exception)
+            {
+                
             }
-
-            Refresh();
         }
 
         private void EditEmployee(object obj)

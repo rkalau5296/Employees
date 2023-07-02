@@ -26,7 +26,7 @@ namespace Employees.Models.Repositories
         public void AddToDb(List<Employee> employees)
         {
             using (var context = new ApplicationDbContext())
-            {                
+            {                   
                 employees.ForEach(e =>
                 {                    
                     if (!context.Employees.Any(x => x.Id == e.Id))
