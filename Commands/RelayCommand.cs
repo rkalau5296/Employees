@@ -6,8 +6,7 @@ namespace Employees.Commands
     public class RelayCommand : ICommand
     {
         readonly Action<object> _execute;
-        readonly Predicate<object> _canExecute;
-        private ICommand confirmCommand;
+        readonly Predicate<object> _canExecute;        
 
         public RelayCommand(Action<object> execute)
             : this(execute, null)
@@ -20,11 +19,7 @@ namespace Employees.Commands
             _execute = execute ?? throw new ArgumentNullException("execute");
             _canExecute = canExecute;
         }
-
-        public RelayCommand(ICommand confirmCommand)
-        {
-            this.confirmCommand = confirmCommand;
-        }
+        
 
         public bool CanExecute(object parameter)
         {

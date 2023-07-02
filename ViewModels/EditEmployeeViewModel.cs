@@ -16,8 +16,7 @@ namespace Employees.ViewModels
             CloseCommand = new RelayCommand(Close);
             ConfirmCommand = new RelayCommand(Confirm);            
 
-            Employee = employee;
-            //IsUpdate = true;
+            Employee = employee;            
         }
 
         
@@ -36,21 +35,7 @@ namespace Employees.ViewModels
                 _employee = value; 
                 OnPropertyChanged(); 
             }
-        }
-
-        //private bool _isUpdate;
-        //public bool IsUpdate
-        //{
-        //    get
-        //    {
-        //        return _isUpdate;
-        //    }
-        //    set
-        //    {
-        //        _isUpdate = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        }        
 
         private ObservableCollection<EmployeeWrapper> _employees;
         public ObservableCollection<EmployeeWrapper> Employees
