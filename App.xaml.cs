@@ -20,6 +20,8 @@ namespace Employees
         {
             var metroWindow = Current.MainWindow as MetroWindow;
             metroWindow.ShowMessageAsync("Nieoczekiwany wyjątek", "Wystąpił nieoczekiwany wyjątek." + Environment.NewLine + e.Exception.Message);
+
+            e.Handled = true;
         }
     }
 }

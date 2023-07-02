@@ -1,4 +1,5 @@
-﻿using Employees.Commands;
+﻿using CsvHelper;
+using Employees.Commands;
 using Employees.Models;
 using Employees.Models.Domains;
 using Employees.Models.Repositories;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -86,11 +88,17 @@ namespace Employees.ViewModels
 
             openFileDialog.ShowDialog();
 
-            //
-            // HOW TO DO?
-            //
+            using (var reader = new StreamReader(openFileDialog.FileName))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                csv.Context.RegisterClassMap<EmployeeMap>();
+                var records = csv.GetRecords<Employee>();
+                var employees = records.ToList();
 
-            _employeeRepository.AddToDb(Employees);
+                _employeeRepository.AddToDb(employees);
+            }
+
+            Refresh();
         }
 
         private void EditEmployee(object obj)

@@ -29,13 +29,12 @@ namespace Employees.Models.Repositories
                 return context.Employees.Single(x => x.Id == id).ToWrapper();                    
             }
         }
-        public void AddToDb(ObservableCollection<EmployeeWrapper> employees)
+        public void AddToDb(List<Employee> employees)
         {
-            var daoEmployees = employees.Select(x => x.ToDao()).ToList();
-
             using (var context = new ApplicationDbContext())
             {
-                daoEmployees.ForEach(e =>
+                
+                employees.ForEach(e =>
                 {
                     context.Employees.Add(e);
                     context.SaveChanges();
