@@ -9,6 +9,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -75,20 +76,17 @@ namespace Employees.ViewModels
         {
             try
             {
-               OpenFileDialog openFileDialog = new OpenFileDialog();                 
-                
-               openFileDialog.ShowDialog();
-               
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.ShowDialog();
 
                 using (var reader = new StreamReader(openFileDialog.FileName))
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                    {
-                        csv.Context.RegisterClassMap<EmployeeMap>();
-                        var records = csv.GetRecords<Employee>();
-                        var employees = records.ToList();
-
-                        _employeeRepository.AddToDb(employees);
-                    }                
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                {
+                    csv.Context.RegisterClassMap<EmployeeMap>();
+                    var records = csv.GetRecords<Employee>();
+                    var employees = records.ToList();
+                    _employeeRepository.AddToDb(employees);
+                }                                  
                 Refresh();
             }
             catch (TypeConverterException e)
@@ -103,6 +101,11 @@ namespace Employees.ViewModels
             {
                 MessageBox.Show($"Nie wybrano ścieżki do pliku.");
             }
+            catch(DbUpdateException e)
+            {
+                MessageBox.Show($"Podany plik zawiera numery Id, którę już istnieją w bazie. Brak możliwości dodania kolejnego rekordu zawierającego to samo Id.");
+            }
+            
         }
 
         private void EditEmployee(object obj)
