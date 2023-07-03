@@ -14,8 +14,8 @@ namespace Employees.ViewModels
         public EditEmployeeViewModel(EmployeeWrapper employee = null)
         {
             CloseCommand = new RelayCommand(Close);
-            ConfirmCommand = new RelayCommand(Confirm);            
-
+            ConfirmCommand = new RelayCommand(Confirm);
+            
             Employee = employee;            
         }
 

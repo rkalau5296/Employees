@@ -12,6 +12,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Employees.ViewModels
@@ -92,15 +93,15 @@ namespace Employees.ViewModels
             }
             catch (TypeConverterException e)
             {
-                Console.WriteLine($"The conversion cannot be performed: {e.Message}");
+                MessageBox.Show($"Próba załączenia pliku o nieprawidłowym rozszerzeniu.");
             }
             catch (BadDataException e)
             {
-                Console.WriteLine($"You can ignore bad data by setting BadDataFound to null: {e.Message}");
+                MessageBox.Show($"Załączony plik nie posiada rekordów.");
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine($"Pusta nazwa ścieżki jest niedozwolona.: {e.Message}");
+                MessageBox.Show($"Nie wybrano ścieżki do pliku.");
             }
         }
 
