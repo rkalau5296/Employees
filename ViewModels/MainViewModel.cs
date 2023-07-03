@@ -29,9 +29,9 @@ namespace Employees.ViewModels
             EditEmployeeCommand = new RelayCommand(EditEmployee, CanEditEmployee);
 
             Refresh();
-        }       
+        }        
 
-        
+        public ICommand RefreshEmployeesCommand { get; set; }
         public ICommand ReadEmployeesFileCommand { get; set; }
         public ICommand EditEmployeeCommand { get; set; }
 
@@ -73,15 +73,17 @@ namespace Employees.ViewModels
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
+
                 openFileDialog.ShowDialog();                
-                using (var reader = new StreamReader(openFileDialog.FileName))
-                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                {
-                    csv.Context.RegisterClassMap<EmployeeMap>();
-                    var records = csv.GetRecords<Employee>();
-                    var employees = records.ToList();
-                    _employeeRepository.AddToDb(employees);
-                }                
+                    using (var reader = new StreamReader(openFileDialog.FileName))
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        csv.Context.RegisterClassMap<EmployeeMap>();
+                        var records = csv.GetRecords<Employee>();
+                        var employees = records.ToList();
+
+                        _employeeRepository.AddToDb(employees);
+                    }                
                 Refresh();
             }catch(Exception)
             {
