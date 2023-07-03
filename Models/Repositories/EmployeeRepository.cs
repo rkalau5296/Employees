@@ -23,12 +23,7 @@ namespace Employees.Models.Repositories
             using (var context = new ApplicationDbContext())
             {                   
                 employees.ForEach(e =>
-                {
-                    //if (!context.Employees.Any(x => x.Id == e.Id))
-                    //{
-                    //    context.Employees.Add(e);
-                    //    context.SaveChanges();
-                    //}
+                {                    
                     context.Employees.Add(e);
                     context.SaveChanges();
                 });                

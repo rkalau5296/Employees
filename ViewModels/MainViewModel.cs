@@ -88,23 +88,22 @@ namespace Employees.ViewModels
                 }                                  
                 Refresh();
             }
-            catch (TypeConverterException e)
+            catch (TypeConverterException)
             {
-                MessageBox.Show($"Próba załączenia pliku o nieprawidłowym rozszerzeniu.");
+                MessageBox.Show($"Próba załączenia pliku o nieprawidłowym rozszerzeniu, lub nieprawidłowe dane w pliku.");
             }
-            catch (BadDataException e)
+            catch (BadDataException)
             {
                 MessageBox.Show($"Załączony plik nie posiada rekordów.");
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 MessageBox.Show($"Nie wybrano ścieżki do pliku.");
             }
-            catch(DbUpdateException e)
+            catch(DbUpdateException)
             {
                 MessageBox.Show($"Podany plik zawiera numery Id, którę już istnieją w bazie. Brak możliwości dodania kolejnego rekordu zawierającego to samo Id.");
-            }
-            
+            }            
         }
 
         private void EditEmployee(object obj)
@@ -123,6 +122,5 @@ namespace Employees.ViewModels
         {
             return SelectedEmployee != null;
         }
-
     }
 }
