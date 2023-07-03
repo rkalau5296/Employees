@@ -53,6 +53,8 @@ namespace Employees.ViewModels
 
         private void Confirm(object obj)
         {
+            if (!Employee.IsValid)
+                return;
             _employeeRepository.Update(Employee);
             CloseWindow(obj as Window);
         }

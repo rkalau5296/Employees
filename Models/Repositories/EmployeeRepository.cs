@@ -32,11 +32,13 @@ namespace Employees.Models.Repositories
                 });                
             }
         }
-        public void Update(EmployeeWrapper employee)
+        public void Update(EmployeeWrapper employeeWrapper)
         {
+            var employee = employeeWrapper.ToDao();
+
             using (var context = new ApplicationDbContext())
             {
-                var employeeToUpdate = context.Employees.Single(x => x.Id == employee.Id);
+                var employeeToUpdate = context.Employees.Find(employee.Id);
 
                 employeeToUpdate.Id = employee.Id;
                 employeeToUpdate.Name = employee.Name;

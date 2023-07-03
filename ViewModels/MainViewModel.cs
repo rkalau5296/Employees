@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using CsvHelper.TypeConversion;
 using Employees.Commands;
 using Employees.Models.Domains;
 using Employees.Models.Repositories;
@@ -7,6 +8,7 @@ using Employees.Views;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -30,7 +32,7 @@ namespace Employees.ViewModels
 
             Refresh();
         }        
-
+        
         public ICommand RefreshEmployeesCommand { get; set; }
         public ICommand ReadEmployeesFileCommand { get; set; }
         public ICommand EditEmployeeCommand { get; set; }
@@ -72,10 +74,12 @@ namespace Employees.ViewModels
         {
             try
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
+               OpenFileDialog openFileDialog = new OpenFileDialog();                 
+                
+               openFileDialog.ShowDialog();
+               
 
-                openFileDialog.ShowDialog();                
-                    using (var reader = new StreamReader(openFileDialog.FileName))
+                using (var reader = new StreamReader(openFileDialog.FileName))
                     using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                     {
                         csv.Context.RegisterClassMap<EmployeeMap>();
@@ -85,9 +89,18 @@ namespace Employees.ViewModels
                         _employeeRepository.AddToDb(employees);
                     }                
                 Refresh();
-            }catch(Exception)
+            }
+            catch (TypeConverterException e)
             {
-                
+                Console.WriteLine($"The conversion cannot be performed: {e.Message}");
+            }
+            catch (BadDataException e)
+            {
+                Console.WriteLine($"You can ignore bad data by setting BadDataFound to null: {e.Message}");
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine($"Pusta nazwa ścieżki jest niedozwolona.: {e.Message}");
             }
         }
 

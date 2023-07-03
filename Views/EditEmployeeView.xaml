@@ -27,16 +27,16 @@
         <Label Visibility="{Binding IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Id" Margin="5"/>
         <TextBox Text="{Binding Employee.Id, ValidatesOnDataErrors=True}"  IsReadOnly="True" Grid.Column="1" Margin="5"/>        
         
-        <Label Grid.Row="2" Content="Name" Margin="5"/>
+        <Label Grid.Row="2" Content="Imię" Margin="5"/>
         <TextBox Text="{Binding Employee.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="2" Grid.Column="1" Margin="5"/>
 
-        <Label Grid.Row="3" Content="Surename" Margin="5"/>
+        <Label Grid.Row="3" Content="Nazwisko" Margin="5"/>
         <TextBox Text="{Binding Employee.Surename, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="3" Grid.Column="1" Margin="5"/>
 
         <Label Grid.Row="4" Content="Email" Margin="5"/>
         <TextBox Text="{Binding Employee.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="4" Grid.Column="1" Margin="5"/>
 
-        <Label Grid.Row="5" Content="Phone" Margin="5"/>
+        <Label Grid.Row="5" Content="Telefon" Margin="5"/>
         <TextBox Text="{Binding Employee.Phone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="5" Grid.Column="1" Margin="5"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center"   >

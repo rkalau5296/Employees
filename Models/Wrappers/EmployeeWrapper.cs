@@ -14,6 +14,12 @@ namespace Employees.Models.Wrappers
         public string Email { get; set; }
         public string Phone { get; set; }
 
+
+        private bool _isNameValid;
+        private bool _isSurenameValid;
+        private bool _isEmailValid;
+        private bool _isPhoneValid;
+
         public string this[string columnName]
         {
             get
@@ -24,40 +30,48 @@ namespace Employees.Models.Wrappers
                         if (string.IsNullOrWhiteSpace(Name))
                         {
                             Error = "Pole Imię jest wymagane.";
+                            _isNameValid = false;
                         }
                         else
                         {
                             Error = string.Empty;
+                            _isNameValid = true;
                         }
                         break;
                     case nameof(Surename):
                         if (string.IsNullOrWhiteSpace(Name))
                         {
                             Error = "Pole Nazwisko jest wymagane.";
+                            _isSurenameValid = false;
                         }
                         else
                         {
                             Error = string.Empty;
+                            _isSurenameValid = true;
                         }
                         break;
                     case nameof(Email):
                         if (string.IsNullOrWhiteSpace(Name))
                         {
                             Error = "Pole email jest wymagane.";
+                            _isEmailValid = false;
                         }
                         else
                         {
                             Error = string.Empty;
+                            _isEmailValid = true;
                         }
                         break;
                     case nameof(Phone):
                         if (string.IsNullOrWhiteSpace(Name))
                         {
                             Error = "Pole Phone jest wymagane.";
+                            _isPhoneValid = false;
                         }
                         else
                         {
                             Error = string.Empty;
+                            _isPhoneValid = true;
                         }
                         break;
                     default:
@@ -71,6 +85,13 @@ namespace Employees.Models.Wrappers
         public string Error
         {
             get; set;
+        }
+        public bool IsValid
+        {
+            get 
+            {
+                return _isNameValid && _isSurenameValid && _isEmailValid && _isPhoneValid;
+            }
         }
     }
 
