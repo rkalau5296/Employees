@@ -8,7 +8,6 @@ using Employees.Views;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.IO;

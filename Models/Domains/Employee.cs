@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Employees.Models.Domains
+﻿namespace Employees.Models.Domains
 {
     public class Employee
     {

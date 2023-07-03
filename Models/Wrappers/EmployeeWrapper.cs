@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Data.Entity.Migrations.Model;
-using System.Xml.Linq;
 
 namespace Employees.Models.Wrappers
 {
